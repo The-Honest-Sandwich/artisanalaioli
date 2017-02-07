@@ -2,7 +2,7 @@
 <hr class="my-4">
 
 <div>
-  <!--  <h3>Add something about this bill</h3>
+    <h3>Add something about this bill</h3>
         <form class="row">
             <div class="form-group col-xs-12">
                 <label class="col-form-label">Who is the bill from?</label>     
@@ -35,10 +35,12 @@
                 You successfully add the bill info.
             </div>
             <input ng-click="addbillinfo()" class="btn btn-primary pull-right" type="submit" value="Add bill info">
+            <!-- <label>Upload bill image<br></label> -->
+            <!-- <input my-upload type="file" name="upload"><br> -->
         </form>
         
         <div class="spacer"></div>
-        <hr class="my-4"> -->
+        <hr class="my-4">
 
         <h3 >Add items you want to get paid</h3>
         <form class="row" ng-submit="additeminfo()">
@@ -80,7 +82,7 @@
 
         <hr class="my-4">
 
-        <a ng-if="readyToSplit" class="btn btn-primary pull-right" ng-click="addBill()" href="#!/split">Next Step</a>
+        <a ng-if="readyToSplit" class="btn btn-primary pull-right" ng-click="addBill()" href="#!/addfriend">Next Step</a>
 
 <!-- the following is for uploading bill image -->
 
