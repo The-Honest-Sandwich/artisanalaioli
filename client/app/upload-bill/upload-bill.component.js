@@ -5,7 +5,7 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 .controller('UploadBillCtrl', function ($scope, Bill) {
   // $scope.image = "";
   $scope.priceBeforeTip = 0;
-  $scope.readyToSplit = true;
+  $scope.readyToSplit = false;
   $scope.item; // single item
   $scope.price; // price for single item
   $scope.tax = 0;
