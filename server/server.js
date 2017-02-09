@@ -33,20 +33,20 @@ var parseImageData = function( data ) {
 	var strings = data[0]
 	var itemList = [];
 	var nameOfDish = [];
-	data.filter( (value) => {
+	data = data.filter( (value) => {
 		return typeof value === 'string';
 	})
 	for(var i = 1; i < strings.length; i++) {
-		console.log(strings[i])
+		// console.log(strings[i])
 		if( _.contains(strings[i].split(''), '.') ){
-		// 	var current = strings[i-1]
-		// 	var index = i - 1;
-		// 	while( !_.contains(strings[index].split(''), '.') ) {
-		// 		nameOfDish.push(strings[index])
-
-		// 		index--;
-		// 	}
-
+			var current = strings[i-1]
+			var index = i - 1;
+			while( !_.contains(strings[index].split(''), '.') ) {
+				nameOfDish.push(strings[index])
+				// console.log(strings[index])
+				index--;
+			}
+			// console.log(nameOfDish.reverse().join(''))
 			// console.log(strings[i])
 			itemList.push({
 				name: strings[i -1],
@@ -54,5 +54,9 @@ var parseImageData = function( data ) {
 			})
 		}
 	}
+	itemList = itemList.filter( (value) => {
+		console.log(!Number(value.name))
+		return (!Number(value.name))
+	})
 	return itemList
 }  
