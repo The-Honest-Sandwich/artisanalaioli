@@ -9,18 +9,22 @@ angular.module('myApp.payment', [])
   $scope.amountToPay = null;
   $scope.amountString = null;
   $scope.savedPayments = [];
-  $scope.cardNumber = null;
-  $scope.cvvNumber = null;
-  $scope.cardName = null;
-  $scope.address1 = null;
-  $scope.address2 = null;
-  $scope.cityName = null;
-  $scope.stateName = null;
-  $scope.zipCode = null;
   $scope.paymentInfoReady = false;
   $scope.paymentSubmitted = false;
   $scope.saveCard = false;
   $scope.paymentSaveName = '';
+
+  $scope.paymentInfo = {
+    'cardNumber': null,
+    'cvvNumber': null,
+    'cardName': null,
+    'address1': null,
+    'address2': null,
+    'cityName': null,
+    'stateName': null,
+    'zipCode': null,
+    'name': null
+  }
 
   // on initialize, populates all users from DB into $scope.users for typeahead
   var init = function() {
@@ -36,9 +40,30 @@ angular.module('myApp.payment', [])
         }
     });
 
+    Users.getPaymentMethods(function(res) {
+      $scope.savedPayments = res.data.methods;
+      console.log('Loaded payment methods:', $scope.savedPayments);
+    });
+
   };
 
   init();
+
+  $scope.selectSaved = function() {
+    var selected = $scope.savedPaymentChoice;
+    for (var i = 0; i < $scope.savedPayments.length; i++) {
+      if ($scope.savedPayments[i].name === selected) {
+        $scope.paymentInfo.cardNumber = $scope.savedPayments[i].cardNumber,
+        $scope.paymentInfo.cvvNumber = $scope.savedPayments[i].cvvNumber,
+        $scope.paymentInfo.cardName = $scope.savedPayments[i].cardName,
+        $scope.paymentInfo.address1 = $scope.savedPayments[i].address1,
+        $scope.paymentInfo.address2 = $scope.savedPayments[i].address2 || '',
+        $scope.paymentInfo.cityName = $scope.savedPayments[i].cityName,
+        $scope.paymentInfo.stateName = $scope.savedPayments[i].stateName,
+        $scope.paymentInfo.zipCode = $scope.savedPayments[i].zipCode
+      }
+    }
+  };
 
   $scope.selectUser = function(username, amount) {
     $scope.selectedUser = username;
@@ -50,13 +75,16 @@ angular.module('myApp.payment', [])
   $scope.prepPayment = function() {
     $scope.paymentInfoReady = true;
     $scope.enterPaymentInfo = false;
+    console.log($scope.savedPaymentChoice);
   }
 
   $scope.submitPayment = function() {
     console.log('Payment submitted!');
     if ($scope.saveCard) {
       console.log($scope.paymentSaveName);
+      Users.addPaymentMethod($scope.paymentInfo);
     }
+
     $scope.paymentInfoReady = false;
     $scope.paymentSubmitted = true;
 
