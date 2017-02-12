@@ -1,5 +1,5 @@
 import { passport, login, register, logout, checkAuth } from './authentication';
-import { postBill, getOwnBills, getAllUsers, getFriends, addFriend, removeFriend } from '../db/controllers';
+import { postBill, getOwnBills, getAllUsers, getFriends, addFriend, removeFriend, addPaymentMethod, getPaymentMethods } from '../db/controllers';
 import { OCR } from '../server';
 
 export default function routes(app, express) {
@@ -19,6 +19,9 @@ export default function routes(app, express) {
   app.post('/me/friends', addFriend);
   app.post('/me/friends/remove', removeFriend);
 
+  app.get('/me/payments', getPaymentMethods);
+  app.post('/me/payments', addPaymentMethod);
+  
   app.post('/ocr', OCR);
   
   /*
