@@ -242,6 +242,7 @@ form .progress {
 }
 
 .receipt-header {
+  padding: 15px;
   background-color: rgb(245, 245, 245) !important;
   color: black !important;
 }
@@ -300,6 +301,11 @@ form .progress {
   text-align: right;
 }
 
+.dolla-dolla-bill {
+  width: 20px;
+  text-align: left;
+}
+
 .amount {
   text-align: right;
   padding-right: 235px;
@@ -310,7 +316,12 @@ form .progress {
   height: 110px;
 }
 
-.celebrate {
-  background-image: url('https://media.giphy.com/media/120ErahsQyf1q8/source.gif');
+.amount-bill {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.list-group-item {
+  padding: 12px 20px 4px 30px;
 }
 

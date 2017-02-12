@@ -16,7 +16,23 @@
               </div>
               <div class="collapse panel-collapse" role='tabpanel' id='{{$index}}' aria-labelledby='collapseListGroupHeading1'>
                 <ul class='list-group'>
-                  <li class='list-group-item' ng-repeat='person in bill.info'> {{person.name + ': ' + person.total}} </li>
+                  <li class='list-group-item' ng-repeat='person in bill.info'> 
+                  <div class='row'>
+          <div class="col-sm-10 friend-portion">{{ person.name }}: </div>
+            <table class="col-sm-2 friend-portion user-price-table">
+              <tr>
+                <td class='dolla-dolla-bill2'>$</td>
+                <td class='amount-bill'>{{ person.total.toFixed(2) }}</td>
+                <td></td>
+              </tr>
+            </table>
+            </div>
+
+
+<!-- 
+                    <div>{{person.name }} + ': '</div>  
+                    <div>${{person.total}} </div> -->
+                  </li>
                 </ul>
               </div>
             </div>
