@@ -59,6 +59,7 @@ angular.module('myApp.addItems', [])
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           }).then(function(res) {
             console.log('res data', res.data)
+            $scope.findHighestScanned(res.data);
             $scope.uploadedScannedItems(res.data);
           })
 
@@ -76,20 +77,42 @@ angular.module('myApp.addItems', [])
     });
   }
 
+  $scope.findHighestScanned = function(data) {
+    var sortedPrices = [];
+
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].price.charAt(0) === '$') {
+        data[i].price = data[i].price.slice(1);
+      }
+      
+      if (!isNaN(parseFloat(data[i].price))) {
+        sortedPrices.push([i, data[i].price]);
+      }
+    }
+    sortedPrices = sortedPrices.sort((a, b) => ( b[1] - a[1]));
+    $scope.ignoreIndex = [sortedPrices[0][0], sortedPrices[1][0]]
+    if (sortedPrices[0][1] === sortedPrices[1][1]) {
+      $scope.ignoreIndex.push(sortedPrices[2][0]);
+    }
+
+    return $scope.ignoreIndex;
+  }
+
   $scope.uploadedScannedItems = function(data) {
     $scope.uploadedItems = data;
     for (var i = 0; i < $scope.uploadedItems.length; i++) {
-
-      if ($scope.uploadedItems[i].price.charAt(0) === '$') {
-        $scope.uploadedItems[i].price = $scope.uploadedItems[i].price.slice(1);
-      }
-      if ($scope.uploadedItems[i].name.toLowerCase() === 'tax' || $scope.uploadedItems[i].name.toLowerCase() === 'sales tax') {
-        $scope.tax = parseFloat($scope.uploadedItems[i].price);
-        Bill.updateTax($scope.tax);
-      } else if (!isNaN(parseFloat($scope.uploadedItems[i].price))) {
-        $scope.item = $scope.uploadedItems[i].name;
-        $scope.price = $scope.uploadedItems[i].price;
-        $scope.additeminfo();
+      if (!$scope.ignoreIndex.includes(i)) {
+        if ($scope.uploadedItems[i].price.charAt(0) === '$') {
+          $scope.uploadedItems[i].price = $scope.uploadedItems[i].price.slice(1);
+        }
+        if ($scope.uploadedItems[i].name.toLowerCase() === 'tax' || $scope.uploadedItems[i].name.toLowerCase() === 'sales tax') {
+          $scope.tax = parseFloat($scope.uploadedItems[i].price);
+          Bill.updateTax($scope.tax);
+        } else if (!isNaN(parseFloat($scope.uploadedItems[i].price))) {
+          $scope.item = $scope.uploadedItems[i].name;
+          $scope.price = $scope.uploadedItems[i].price;
+          $scope.additeminfo();
+        }
       }
     }
   }
