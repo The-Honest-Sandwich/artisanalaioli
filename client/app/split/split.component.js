@@ -17,44 +17,45 @@ angular.module('myApp.split', [])
 
 
   /************** TEST DATA ****************/
-  $scope.items = [
-      [1, 'pizza', 10, []],
-      [2, 'beer', 16, []],
-      [3, 'rice', 13, []],
-      [4, 'potato', 12, []]
-    ]
 
-    $scope.friends = [
-      {name: 'Pat', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
-      {name: 'Frank', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
-      {name: 'Greg', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
-      {name: 'James', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'}
-    ]
+  // $scope.items = [
+  //     [1, 'pizza', 10, []],
+  //     [2, 'beer', 16, []],
+  //     [3, 'rice', 13, []],
+  //     [4, 'potato', 12, []]
+  //   ]
 
-    $scope.bill = {
-      items: $scope.items,
-      name: 'Pizzeria',
-      subtotal: 51,
-      tax: 5,
-      taxRate: 0.098,
-      tip: 7.65,
-      tipRate: 0.15
-    }
-  $scope.final = {
-    tax: $scope.bill.tax,
-    tip: $scope.bill.tip,
-    total: $scope.bill.subtotal + parseFloat($scope.bill.tax) + parseFloat($scope.bill.tip)
-  }
+  //   $scope.friends = [
+  //     {name: 'Pat', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+  //     {name: 'Frank', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+  //     {name: 'Greg', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+  //     {name: 'James', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'}
+  //   ]
+
+  //   $scope.bill = {
+  //     items: $scope.items,
+  //     name: 'Pizzeria',
+  //     subtotal: 51,
+  //     tax: 5,
+  //     taxRate: 0.098,
+  //     tip: 7.65,
+  //     tipRate: 0.15
+  //   }
+  // $scope.final = {
+  //   tax: $scope.bill.tax,
+  //   tip: $scope.bill.tip,
+  //   total: $scope.bill.subtotal + parseFloat($scope.bill.tax) + parseFloat($scope.bill.tip)
+  // }
   /************************************/
 
-  console.log('friends: ', $scope.friends)
-  console.log('bill: ', $scope.bill)
-  console.log('items: ', $scope.items)
+  // console.log('friends: ', $scope.friends)
+  // console.log('bill: ', $scope.bill)
+  // console.log('items: ', $scope.items)
   /******************************************/
   /* THIS IS STRUCTURE OF bill, item, friend
   /* bill: {name: string, items:[], subtotal: number, taxRate: number, tipRate: number}
   /* item: [id, itemname, price, [people.names]];
-  /* friend: {name: string, items: [], cost: {}, total: number}
+  /* friend: {name: string, items: [], cost: {}, total: number, displayTota: string}
   /*****************************************/ 
 
   $scope.getAllFriendName = function() {
@@ -74,11 +75,6 @@ angular.module('myApp.split', [])
   * @param {object} input a friend object
   */
   $scope.grandTotal = function(friend) {
-    // var totalBeforeTip = 0;
-    // friend.items.forEach(function(singleitem) {
-    //   totalBeforeTip += singleitem[2];
-    // });
-
     $scope.final.tip = Number.parseFloat(($scope.bill.subtotal * $scope.bill.tipRate).toFixed(2));
     $scope.final.tax = Number.parseFloat(($scope.bill.subtotal * $scope.bill.taxRate).toFixed(2));
     $scope.final.total = Number.parseFloat(($scope.bill.subtotal + $scope.final.tip + $scope.final.tax).toFixed(2));
@@ -131,7 +127,6 @@ angular.module('myApp.split', [])
   }
   
   $scope.highlightItem = function(item, index) {
-    // var needReassign = false;
     if (item[3].length > 0) {
       $scope.itemSelected[index]='selected'
       if ($scope.assigneditems.indexOf(item) < 0) {
@@ -156,17 +151,11 @@ angular.module('myApp.split', [])
     }
 
     $scope.assignCost(friend, item);
-    // $scope.friendSelected[index] = $scope.friendSelected[index]=='selected'?'':'selected';
     $scope.highlightItem(item, itemIndex);
     $scope.individualTotal();
-    //Assign item to friend
-    //Visually apply item name and total next to assignee
   }
 
   $scope.assignCost = function(friend, item) {
-    // can't do it at the friend level as it doesn't update properly
-    // need to do the logic on the food level
-      // then push it out to the friends in the food friend array
     var itemCost = parseFloat((item[2] / item[3].length).toFixed(2));
     itemCost = itemCost * (1 + $scope.bill.taxRate + $scope.bill.tipRate);
     itemCost = itemCost.toFixed(2);
@@ -219,11 +208,7 @@ angular.module('myApp.split', [])
     }
   }
 
-  $scope.randomColor = function() {
-    console.log('yay')
-    var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    return { 'background-color': hue }
-  }
+
   // $scope.init = function() {
   //   $scope.subtotal = Bill.getSubtotal();
   //   $scope.bill = Bill.getBill();

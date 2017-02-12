@@ -6,15 +6,20 @@ import mailSender from './utils/mailer';
 var _ = require('underscore');
 var app = express();
 
+var bodyParser = require('body-parser');
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
 var rootDir = __dirname;
 
-middleware(app,express);
+middleware(app, express);
 routes(app, express);
 mailSender(app, express, rootDir);
 
 app.listen(3000, function() {
   console.log('listening on port 3000');
-
 });
 
 export { app };
@@ -24,16 +29,24 @@ const vision = require('@google-cloud/vision')({
   	projectId: 'AIzaSyDp_Bl-MD9PhAu3-SqWaLo5vf9cQLQa3NM',
   	keyFilename: './server/Divvy-8f936cd51c11.json'
 })
+//http://www.trbimg.com/img-561c0d46/turbine/la-sp-sarkisian-alcohol-receipts-20151012
+export function OCR(req, res) {
+	var link = req.body;
+	for(var key in link) {
+		link = key
+	}
+	vision.detectText(link)
+		.then((results => {
+			// console.log( JSON.stringify(results[results.length-1].responses[0], null, 4) )
+			res.data = parseRows(assignRows(results));
+			console.log(res.data)
+			res.send(res.data)
 
-vision.detectText('https://static3.businessinsider.com/~~/f?id=4acb9b500000000000bf65ea')
-.then((results => {
-	// console.log( JSON.stringify(results[results.length-1].responses[0], null, 4) )
+		})).catch( (err) => {
+			console.log(err)
+		});
+};
 
-	console.log( parseRows(assignRows(results)) )
-})).catch( (err) => {
-	console.log(err)
-});
-  
 var checkRows = function(rows, yValue) {
 	var bool = false
 	rows.forEach( (row, i) => {
@@ -50,12 +63,12 @@ var assignRows = function(data) {
 	listWithVertices.shift()
 	var rows = [];
 	var row = {};
-	var rowIndex;
+	var rowExists;
 	
 	listWithVertices.forEach( (el, i) => {
 		//check rows 
-		rowIndex = checkRows(rows, el.boundingPoly.vertices[0].y);
-		if(!rowIndex) {
+		rowExists = checkRows(rows, el.boundingPoly.vertices[0].y);
+		if(!rowExists) {
 			//create new row
 			rows.push({
 				bounds: {
@@ -84,7 +97,7 @@ var formatItem = function(strings) {
 	var foodItem = {}
 	strings.forEach( (str, i) => {
 		if(isFoodItem(str)) {
-			foodItem.price = strings.splice(i, 1)
+			foodItem.price = strings.splice(i, 1)[0]
 		}
 	})
 	foodItem.name = strings.join(' ')
@@ -95,13 +108,11 @@ var parseRows = function(rows) {
 	var filteredRows = [];
 	rows.forEach( (row) => {
 		row.strings.forEach( (string) => {
-
 				if(isFoodItem(string)) {
 					filteredRows.push( formatItem( row.strings ) ) 
-
 			}
-		})
-	})
+		});
+	});
 	return filteredRows		
 }
 
@@ -152,45 +163,6 @@ var parseRows = function(rows) {
 // 	})
 // 	return itemList
 // } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // var determineAreaOfInterest = function(array) {
 // 	var areaOfInterest;

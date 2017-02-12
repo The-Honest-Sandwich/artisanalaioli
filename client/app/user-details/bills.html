@@ -8,7 +8,10 @@
             <div class="panel panel-default" ng-repeat="bill in bills">
               <div class='panel-heading receipt-header' role='tab' id='collapseListGroupHeading1'>
                 <h4 class='panel-title'>
-                <a data-target='#{{$index}}' class='collapsed' role='button' data-toggle='collapse' aria-expanded='true' aria-controls='{{$index}}'> <strong>{{bill.restaurant || 'unknown restaurant'}}</strong> ({{bill.date.split('T')[0]}}, {{bill.date.split('T')[1].substring(0, 5)}})</a>
+                <a data-target='#{{$index}}' class='collapsed' role='button' data-toggle='collapse' aria-expanded='true' aria-controls='{{$index}}'> 
+                  <strong>{{bill.restaurant || 'unknown restaurant'}}</strong> 
+                  <span class='pull-right'>{{bill.date.split('T')[0]}} @ {{bill.date.split('T')[1].substring(0, 5)}}</span>
+                </a>
                 </h4>
               </div>
               <div class="collapse panel-collapse" role='tabpanel' id='{{$index}}' aria-labelledby='collapseListGroupHeading1'>
@@ -22,17 +25,19 @@
       </div>
     </div>
 
-<!--
+
+<!--   <span ng-show='!signedIn'>Please login</span>
+=======
   <span ng-show='!signedIn'>Please login</span>
+>>>>>>> 1b1c242ff939bbebd7f5e11fc97bf4780e5754eb
   <div ng-show='retrieved'>
     <div ng-repeat="bill in bills">
       <strong>{{bill.restaurant || 'unknown restaurant'}}</strong> ({{bill.date.split('T')[0]}}, {{bill.date.split('T')[1].substring(0, 5)}})
       <li ng-repeat='person in bill.info'> {{person.name + ': ' + person.total}} </li>
     </div>
   </div>
-</div>
+</div> -->
 
 
--->
 
 <!---->

@@ -1,5 +1,6 @@
 import { passport, login, register, logout, checkAuth } from './authentication';
 import { postBill, getOwnBills, getAllUsers, getFriends, addFriend, removeFriend } from '../db/controllers';
+import { OCR } from '../server';
 
 export default function routes(app, express) {
   app.post('/auth/register', register, passport.authenticate('local'), login);
@@ -18,6 +19,8 @@ export default function routes(app, express) {
   app.post('/me/friends', addFriend);
   app.post('/me/friends/remove', removeFriend);
 
+  app.post('/ocr', OCR);
+  
   /*
   Possible endpoints:
   /me --> get own bills (and debts and debtors) 
