@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title><%= subject %></title>
+    <style type="text/css">
+      /* ==== CSS FOR TEMPLATE ==== */
+
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      .container {
+        /* border: 1px solid gray;
+        border-radius: 5px; */
+        padding: 10px;
+        margin-right: 15px;
+      }
+
+      .container-bottom {
+        width: 250px;
+        border-top: 1px solid gray;
+        padding-left: 0;
+        margin-left: 10px;
+      }
+
+      .logo img {
+        width: 40px;
+        height: 40px;
+      }
+
+      #logo-title {
+        display: inline-block;
+        color: black;
+        vertical-align: 70%;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .message-footer p {
+        font-size: 12px;
+        margin: 0 0 3px 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="message-header">
+        <h1>Hello, <%= name %>.</h1>
+      </div>
+      <div class="message-body">
+        <p>Divvy user <strong><%= payer %></strong> just submitted a payment to you in the amount of <%= amount %>.  Let us know if there are any problems!</p>
+      </div>
+    </div>
+    <div class="container container-bottom">
+      <div class="logo">
+        <a target="_blank" href="http://localhost:3000">
+          <img src="http://dralexledgister.com/wp-content/uploads/2015/11/big-money-icon.png" />
+          <div id="logo-title"><span><strong>Divvy</strong></span></div>
+        </a>
+      </div>
+      <div class="message-footer">
+        <p><a target="_blank" href='http://localhost:3000/#!/bills'>Click here</a> to view your Divvy bill split history.</p>
+        <p>Not a registered Divvy user?  <a target="_blank" href='http://localhost:3000/#!/signup'>Sign up today!</a></p>
+      </div>
+    </div>
+  </body>
+</html>

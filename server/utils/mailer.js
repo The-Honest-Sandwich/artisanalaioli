@@ -50,6 +50,27 @@ export default function mailSender(app, express, rootDir) {
     })
   });
 
+  // this notifies a user they were paid
+  app.post('/paid', function(req, res, next) {
+    // send an email to them telling them they owe money
+    app.mailer.send('paid', {
+      to: req.body.to.email, // REQUIRED. This can be a comma delimited string just like a normal email to field. 
+      subject: 'From Divvy: You were just paid!', // REQUIRED.
+      otherProperty: 'Other Property', // All additional properties are also passed to the template as local variables.
+      name: req.body.to.username,
+      payer: req.body.from,
+      amount: req.body.amount
+    }, function (err) {
+      if (err) {
+        // handle error
+        console.log(err);
+        res.send('There was an error sending the email');
+        return;
+      }
+      res.send('Email Sent');
+    });
+  });
+
   // this simply renders the e-mail template (views/email.ejs) for easy rendering during editing
   app.get('/mailrender', function (req, res, next) {
     res.end(ejs.renderFile('../artisanalaioli/server/views/email.ejs',

@@ -227,8 +227,38 @@ angular.module('myApp.services',[])
     });
   };
 
+  var paymentNotify = function(data) {
+    $http({
+      method: 'POST',
+      url: '/paid',
+      data: data
+    });
+  }
+
+  var getPaymentMethods = function(cb) {
+    $http({
+      method: 'GET',
+      url: '/me/payments'
+    })
+    .then(function(res) {
+      console.log(res);
+      cb(res);
+    });
+  }
+
+  var addPaymentMethod = function(data) {
+    $http({
+      method: 'POST',
+      url: '/me/payments',
+      data: data
+    });
+  }
+
   return {
-    getAll: getAll
+    getAll: getAll,
+    paymentNotify: paymentNotify,
+    getPaymentMethods: getPaymentMethods,
+    addPaymentMethod: addPaymentMethod
   }
 
 });
