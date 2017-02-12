@@ -58,6 +58,33 @@ function removeFriend(req, res, next) {
     });
   });
 }
+
+function addPaymentMethod(req, res) {
+  User.findOne({username: req.session.username})
+  .then(function(user) {
+    user.paymentMethods.push(req.body);
+    user.save(function(err, savedUser) {
+      if (err) {
+        console.log(error);
+      } else {
+        res.send('Payment method added');
+      }
+    })
+  });
+}
+
+function getPaymentMethods(req, res) {
+  User.findOne({'username': req.session.username})
+  .then(function(user) {
+    res.json({'methods': user.paymentMethods});
+  })
+  .catch(function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
+
 /*
 Consider refactoring to also send all bills related to you (the ones
 you don't own but were part of)
@@ -118,6 +145,6 @@ function postBill(req, res, next) {
   });
 }
 
-export { postBill, getOwnBills, getAllUsers, getFriends, addFriend, removeFriend };
+export { postBill, getOwnBills, getAllUsers, getFriends, addFriend, removeFriend, addPaymentMethod, getPaymentMethods };
 
 

@@ -39,8 +39,9 @@
           <div class="col-xs-9 col-sm-8"><p>Select from saved payment options:</p></div>
         </div>
         <div class="row">
-          <div class="col-xs-12 col-sm-8">
-            <select ng-model="savedPaymentChoice">
+          <div class="col-xs-3 col-sm-8">
+            <select ng-model="savedPaymentChoice" ng-change="selectSaved()">
+              <option value="" disabled selected>Select one...</option>
               <option ng-repeat="payment in savedPayments">{{payment.name}}</option>
             </select>
           </div>
@@ -56,61 +57,61 @@
         <div class="row">
           <div class="col-xs-4">Card #:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="card-number" ng-model="cardNumber" maxlength="16" minlength="16" required />
+            <input type="text" class="form-control" name="card-number" ng-model="paymentInfo.cardNumber" maxlength="16" minlength="16" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">CVV #:</div>
           <div class="col-xs-4">
-            <input type="text" class="form-control" name="cvv-number" ng-model="cvvNumber" maxlength="3" minlength="3" required />
+            <input type="text" class="form-control" name="cvv-number" ng-model="paymentInfo.cvvNumber" maxlength="3" minlength="3" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">Name on Card:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="card-name" ng-model="cardName" required />
+            <input type="text" class="form-control" name="card-name" ng-model="paymentInfo.cardName" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">Address 1:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="address-1" ng-model="address1" required />
+            <input type="text" class="form-control" name="address-1" ng-model="paymentInfo.address1" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">Address 2:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="address-2" ng-model="address2" />
+            <input type="text" class="form-control" name="address-2" ng-model="paymentInfo.address2" />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">City:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="city-name" ng-model="cityName" required/>
+            <input type="text" class="form-control" name="city-name" ng-model="paymentInfo.cityName" required/>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">State:</div>
           <div class="col-xs-4">
-            <input type="text" class="form-control" name="state" ng-model="stateName" maxlength="2" required />
+            <input type="text" class="form-control" name="state" ng-model="paymentInfo.stateName" maxlength="2" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">Zip:</div>
           <div class="col-xs-4">
-            <input type="text" class="form-control" name="zip-code" ng-model="zipCode" maxlength="5" required />
+            <input type="text" class="form-control" name="zip-code" ng-model="paymentInfo.zipCode" maxlength="5" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12 checkbox">
-            <label><input type="checkbox" id="save-card" value="save_card" ng-model="saveCard" ng-click="paymentSaveName = ''">
-            Save this payment info for later.</label>
+            <label><input type="checkbox" id="save-card" value="save_card" ng-model="saveCard" ng-click="paymentInfo.name = ''">
+            Save this payment info for later (NOT SECURE AT ALL).</label>
           </div>
         </div>
         <div class="row" ng-show="saveCard">
           <div class="col-xs-4">Name:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="payment-save-name" ng-model="paymentSaveName" />
+            <input type="text" class="form-control" name="payment-save-name" ng-model="paymentInfo.name" />
           </div>
         </div>
       <div class="row">
@@ -128,35 +129,35 @@
     <div class="row col-xs-12"><h5>Confirm payment info:</h5></div>
     <div class="row">
       <div class="col-xs-4">Card Number:</div>
-      <div class="col-xs-8"><strong>XXXX-XXXX-XXXX-{{cardNumber.substring(cardNumber.length - 4, cardNumber.length)}}</strong></div>
+      <div class="col-xs-8"><strong>XXXX-XXXX-XXXX-{{paymentInfo.cardNumber.substring(12, 16)}}</strong></div>
     </div>
     <div class="row">
       <div class="col-xs-4">CVV:</div>
-      <div class="col-xs-8"><strong>{{cvvNumber}}</strong></div>
+      <div class="col-xs-8"><strong>{{paymentInfo.cvvNumber}}</strong></div>
     </div>
     <div class="row">
       <div class="col-xs-4">Name:</div>
-      <div class="col-xs-8"><strong>{{cardName}}</strong></div>
+      <div class="col-xs-8"><strong>{{paymentInfo.cardName}}</strong></div>
     </div>
     <div class="row">
       <div class="col-xs-4">Address:</div>
-      <div class="col-xs-8"><strong>{{address1}}</strong></div>
+      <div class="col-xs-8"><strong>{{paymentInfo.address1}}</strong></div>
     </div>
     <div class="row">
       <div class="col-xs-4">Address 2:</div>
-      <div class="col-xs-8"><strong>{{address2}}</strong></div>
+      <div class="col-xs-8"><strong>{{paymentInfo.address2}}</strong></div>
     </div>
     <div class="row">
       <div class="col-xs-4">City:</div>
-      <div class="col-xs-8"><strong>{{cityName}}</strong></div>
+      <div class="col-xs-8"><strong>{{paymentInfo.cityName}}</strong></div>
     </div>
     <div class="row">
       <div class="col-xs-4">State:</div>
-      <div class="col-xs-8"><strong>{{stateName}}</strong></div>
+      <div class="col-xs-8"><strong>{{paymentInfo.stateName}}</strong></div>
     </div>
     <div class="row">
       <div class="col-xs-4">Zip Code:</div>
-      <div class="col-xs-8"><strong>{{zipCode}}</strong></div>
+      <div class="col-xs-8"><strong>{{paymentInfo.zipCode}}</strong></div>
     </div>
     <br />
     <div class="row">

@@ -11,6 +11,10 @@ var UserSchema = new mongoose.Schema({
   friends: [mongoose.Schema.Types.ObjectId],
   debts: [mongoose.Schema.Types.ObjectId],
   debtors: [mongoose.Schema.Types.ObjectId],
+  paymentMethods: {
+    type: Array,
+    default: []
+  },
   venmo: String
 });
 
