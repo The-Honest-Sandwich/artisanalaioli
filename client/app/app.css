@@ -131,6 +131,10 @@ li {
   color: #b5ddff;
 }
 
+.center-bills {
+  padding: 0px !important;
+}
+
 .remove:hover {
   cursor: pointer;
   color: #c12323;
