@@ -43,7 +43,6 @@ export default function mailSender(app, express, rootDir) {
             res.send('There was an error sending the email');
             return;
           }
-          res.send('Email Sent');
         });
       }
       
@@ -67,7 +66,6 @@ export default function mailSender(app, express, rootDir) {
         res.send('There was an error sending the email');
         return;
       }
-      res.send('Email Sent');
     });
   });
 
