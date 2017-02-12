@@ -89,6 +89,9 @@ angular.module('myApp.services',[])
       mybill.name = name;
     }
 
+    var updateTax = function(newTax) {
+      mybill.tax = newTax;
+    }
 
     return {
       getItems: getItems,
@@ -104,7 +107,8 @@ angular.module('myApp.services',[])
       getTaxRate: getTaxRate,
       clearAllBill: clearAllBill,
       submitSplit: submitSplit,
-      updateName: updateName
+      updateName: updateName,
+      updateTax: updateTax
     }
   })
 

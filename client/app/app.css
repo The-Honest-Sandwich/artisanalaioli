@@ -72,7 +72,7 @@ h3 {
 }
 
 .price-for-friend {
-  padding-bottom: 10px !important;
+  padding-bottom: 15px !important;
 }
 
 .price-for-friend > li {
@@ -255,9 +255,9 @@ form .progress {
 .individual-items {
   margin-right: 5px;
   font-size: 14px;
-  background-color: rgb(161, 232, 249);
+  background-color: rgb(235, 212, 255);
   padding: 0px 5px 0px 5px !important;
-  border-color: #8cbce2;
+  border-color: #b699e6;
 }
 
 .table-ind-items {
@@ -297,6 +297,7 @@ form .progress {
 
 .dolla-dolla-bill {
   width: 20px;
+  text-align: right;
 }
 
 .amount {
@@ -307,5 +308,9 @@ form .progress {
 .fixed-size {
   width: 598px;
   height: 110px;
+}
+
+.celebrate {
+  background-image: url('https://media.giphy.com/media/120ErahsQyf1q8/source.gif');
 }
 

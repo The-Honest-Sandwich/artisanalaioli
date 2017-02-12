@@ -32,7 +32,8 @@
 
 
 
-<div class='container'>
+
+<div class='container' ng-style="assigneditems.length === items.length ? {'background-image':'url(https://media.giphy.com/media/120ErahsQyf1q8/giphy.gif)'} : { 'background-image': 'none'}">
   <div class="row">
     <div class="card col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
       <div class="card-header text-center">
@@ -41,8 +42,8 @@
       <div class="card-block">
         <div class="price-for-friend row">
           <div class="col-sm-3">Tax: ${{(final.tax).toFixed(2)}}</div>
-          <div class="col-sm-3">Tip: ${{final.tip}}</div>
-          <div class="col-sm-6 bill-total"><strong>Total:</strong> ${{final.total}}</div>
+          <div class="col-sm-3">Tip: ${{(final.tip).toFixed(2)}}</div>
+          <div class="col-sm-6 bill-total"><strong>Total:</strong> ${{(final.total).toFixed(2)}}</div>
         </div>
         <ul ng-repeat='friend in friends' class='remove-bottom-margin'>
           <li>
@@ -63,6 +64,7 @@
             <tr>
               <th>#</th>
               <th>item</th>
+              <th></th>
               <th>price</th>
             </tr>
           </thead>  
@@ -70,7 +72,8 @@
             <tr ng-repeat="item in items" class='table-row' ng-click="openModal(item, $index)" ng-class="itemSelected[$index]" data-toggle="modal" data-target="#exampleModalLive">
               <td>{{item[0]}}</td>
               <td>{{item[1]}}</td>
-              <td>${{item[2].toFixed(2)}}</td>
+              <td class='dolla-dolla-bill'>$</td>
+              <td>{{item[2].toFixed(2)}}</td>
             </tr>
           </tbody>
         </table>
@@ -81,7 +84,6 @@
 <!---->
 <div class="spacer"></div>
 <hr class="my-4">
-
 <a class="btn btn-primary pull-left" href='/#!/uploadbill'>Back</a>
 <a ng-if="assigneditems.length === items.length" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the Bill</a>
 
