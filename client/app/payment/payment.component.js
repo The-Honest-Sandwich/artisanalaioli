@@ -59,6 +59,14 @@ angular.module('myApp.payment', [])
     }
     $scope.paymentInfoReady = false;
     $scope.paymentSubmitted = true;
+
+    var paymentData = {
+      to: $scope.selectedUser,
+      from: $rootScope.username,
+      amount: $scope.amountString
+    };
+
+    Users.paymentNotify(paymentData);
   }
 
 });

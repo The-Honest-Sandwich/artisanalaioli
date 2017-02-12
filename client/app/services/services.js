@@ -223,8 +223,17 @@ angular.module('myApp.services',[])
     });
   };
 
+  var paymentNotify = function(data) {
+    $http({
+      method: 'POST',
+      url: '/paid',
+      data: data
+    });
+  }
+
   return {
-    getAll: getAll
+    getAll: getAll,
+    paymentNotify: paymentNotify
   }
 
 });
