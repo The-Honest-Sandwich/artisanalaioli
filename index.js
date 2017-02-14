@@ -27,7 +27,7 @@ export { app };
 // Imports the Google Cloud client library
 const vision = require('@google-cloud/vision')({
   	projectId: 'AIzaSyDp_Bl-MD9PhAu3-SqWaLo5vf9cQLQa3NM',
-  	keyFilename: './server/Divvy-8f936cd51c11.json'
+  	keyFilename: './Divvy-8f936cd51c11.json'
 })
 //http://www.trbimg.com/img-561c0d46/turbine/la-sp-sarkisian-alcohol-receipts-20151012
 export function OCR(req, res) {
