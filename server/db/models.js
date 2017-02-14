@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://ds133398.mlab.com:33398/heroku_zns9qn3j');
+mongoose.connect('mongodb://heroku_zns9qn3j:2l061k1g40brc21ekoddu9dik4@ds133398.mlab.com:33398/heroku_zns9qn3j');
 mongoose.Promise = Promise;
 
 var UserSchema = new mongoose.Schema({
