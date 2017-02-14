@@ -1,6 +1,6 @@
 import { passport, login, register, logout, checkAuth } from './authentication';
 import { postBill, getOwnBills, getAllUsers, getFriends, addFriend, removeFriend, addPaymentMethod, getPaymentMethods } from '../db/controllers';
-import { OCR } from '../server';
+import { OCR } from '../../index';
 
 export default function routes(app, express) {
   app.post('/auth/register', register, passport.authenticate('local'), login);

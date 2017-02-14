@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start",
-    "start": "nodemon server/server.js --exec babel-node"
+    "start": "npm start"
   },
   "repository": {
     "type": "git",

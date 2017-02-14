@@ -1,7 +1,7 @@
 import express from 'express';
-import routes from './utils/routes';
-import middleware from './utils/middleware';
-import mailSender from './utils/mailer';
+import routes from '.server/utils/routes';
+import middleware from '.server/utils/middleware';
+import mailSender from '.server/utils/mailer';
 
 var _ = require('underscore');
 var app = express();
@@ -85,7 +85,7 @@ var assignRows = function(data) {
 
 var isFoodItem = function(str) {
 	var bool = false
-	if( _.contains(str.split(''), '.')) {
+	if( _.contains(str.split(''), '.') /* && next two characters are numbers */) {
 		bool = true;
 	}
 	return bool
