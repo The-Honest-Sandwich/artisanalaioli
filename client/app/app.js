@@ -120,10 +120,12 @@ angular.module('myApp', [
   $rootScope.newBill = function() {
     Party.removeAll();
     Bill.clearAllBill();
-  }
+  };
 
   $rootScope.signout = function() {
     Auth.signout();
-  }
+  };
+
+  $rootScope.signedIn = false;
 
 });
