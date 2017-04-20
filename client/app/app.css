@@ -6,6 +6,7 @@ body {
 
 .signonBG {
   background-image: url('woodbg.jpg');
+  background-color: rgba(0, 0, 0, 0.9);
   background-size: 100% cover;
   background-repeat: no-repeat;
   background-position: center;
