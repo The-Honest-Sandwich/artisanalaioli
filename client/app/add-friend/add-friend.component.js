@@ -41,10 +41,13 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
   }
 
   $scope.addToPartyManual = function(name, email) {
-    Party.addOne({username: name, email: email});
-    getParty();
-    $scope.emailManual = '';
-    $scope.memberManual = '';
+    if ((name === '' || name === undefined) && (email === '' || email === undefined)) {
+    } else {
+      Party.addOne({username: name, email: email});
+      getParty();
+      $scope.emailManual = '';
+      $scope.memberManual = '';
+    }
   }
 
 });
