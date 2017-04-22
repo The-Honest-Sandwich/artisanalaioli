@@ -62,6 +62,11 @@ angular.module('myApp', [
   // $locationProvider.html5Mode(true);
 
   window.routes = {
+    '/': {
+      templateUrl: 'user-details/bills.html',
+      controller: 'BillsController',
+      middleware: 'async-auth'
+    },
     '/signin': {
       templateUrl: 'auth/signin.html',
       controller: 'AuthController',
