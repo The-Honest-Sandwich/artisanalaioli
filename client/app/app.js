@@ -58,7 +58,7 @@ angular.module('myApp', [
 
 // ROUTE CONFIG
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider, $httpProvider) {
-  $locationProvider.hashPrefix('');
+  $locationProvider.hashPrefix('!');
   // $locationProvider.html5Mode(true);
 
   window.routes = {
