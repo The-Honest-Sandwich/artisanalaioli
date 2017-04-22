@@ -62,6 +62,11 @@ angular.module('myApp', [
   // $locationProvider.html5Mode(true);
 
   window.routes = {
+    '/': {
+      templateUrl: 'user-details/bills.html',
+      controller: 'BillsController',
+      middleware: 'async-auth'
+    },
     '/signin': {
       templateUrl: 'auth/signin.html',
       controller: 'AuthController',
@@ -107,7 +112,7 @@ angular.module('myApp', [
       controller: 'PaymentCtrl',
       middleware: 'async-auth'
     },
-    '/:templatePath*': {
+    '/404': {
       templateUrl: '404.html',
       controller: '',
       middleware: ''
@@ -118,7 +123,7 @@ angular.module('myApp', [
     $routeProvider.when(path, window.routes[path]);
   }
 
-  $routeProvider.otherwise({redirectTo: '/signin'});
+  $routeProvider.otherwise({redirectTo: '/404'});
 }])
 
 .run(function($rootScope, Party, Auth, Bill, $location) {
