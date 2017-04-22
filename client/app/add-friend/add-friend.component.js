@@ -28,7 +28,8 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
   }
 
   $scope.addToParty = function(user) {
-    if (user !== '' || user !== undefined) {
+    if (user === '' || user === undefined) {
+    } else {
       Party.addOne(user);
       getParty();
       $scope.partymember = '';

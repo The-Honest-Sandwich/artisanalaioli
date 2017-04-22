@@ -167,7 +167,7 @@ angular.module('myApp.services',[])
     .then(function(response) {
       $rootScope.username = username;
       $rootScope.signedIn = true;
-      $window.location.href = '/#!/addfriend';
+      $window.location.href = '/#/addfriend';
       console.log('login', response);
     })
     .catch(function(error) {
@@ -187,7 +187,7 @@ angular.module('myApp.services',[])
     })
     .then(function(response) {
       $rootScope.signedIn = true;
-      $window.location.href = '/#!/addfriend';
+      $window.location.href = '/#/addfriend';
       console.log('signed up', response);
     })
     .catch(function(error) {
@@ -204,7 +204,7 @@ angular.module('myApp.services',[])
     .then(function(response) {
       console.log('logged out', response);
       $rootScope.signedIn = false;
-      $window.location.href = '/#!/signin';
+      $window.location.href = '/#/signin';
     })
     .catch(function(error) {
       console.log('Error: ', error);

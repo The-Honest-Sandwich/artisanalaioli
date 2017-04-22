@@ -35,7 +35,7 @@
   <nav class="navbar navbar-default navbar-static-top navbar-inverse">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand vcenter" href="#!/bills"><img src='logo-hover.png' id='logo' /><span class="divvy vcenter">Divvy</span></a>
+        <a class="navbar-brand vcenter" href="#/bills"><img src='logo-hover.png' id='logo' /><span class="divvy vcenter">Divvy</span></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -44,12 +44,12 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li ng-show="signedIn" ><a href="#!/addfriend" ng-click="newBill()">New Bill</a></li>
-          <li ng-show="signedIn"><a href="#!/bills">My Bills</a></li>
-          <li ng-show="signedIn"><a href="#!/pay">Pay User</a></li>
+          <li ng-show="signedIn" ><a href="#/addfriend" ng-click="newBill()">New Bill</a></li>
+          <li ng-show="signedIn"><a href="#/bills">My Bills</a></li>
+          <li ng-show="signedIn"><a href="#/pay">Pay User</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li ng-show="signedIn"><a ng-click='signout()' href="#!/signout">Sign out</a></li>
+          <li ng-show="signedIn"><a ng-click='signout()' href="#/signout">Sign out</a></li>
         </ul>
       </div>
     </div>

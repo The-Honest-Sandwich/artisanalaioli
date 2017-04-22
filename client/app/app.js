@@ -58,7 +58,8 @@ angular.module('myApp', [
 
 // ROUTE CONFIG
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider, $httpProvider) {
-  $locationProvider.hashPrefix('!');
+  $locationProvider.hashPrefix('');
+  // $locationProvider.html5Mode(true);
 
   window.routes = {
     '/signin': {
@@ -105,6 +106,11 @@ angular.module('myApp', [
       templateUrl: 'payment/payment.template.html',
       controller: 'PaymentCtrl',
       middleware: 'async-auth'
+    },
+    '/:templatePath*': {
+      templateUrl: '404.html',
+      controller: '',
+      middleware: ''
     }
   };
 
